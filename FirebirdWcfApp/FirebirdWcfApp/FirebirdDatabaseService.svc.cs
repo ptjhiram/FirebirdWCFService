@@ -12,22 +12,29 @@ namespace FirebirdWcfApp
     // NOTE: In order to launch WCF Test Client for testing this service, please select FirebirdDatabaseService.svc or FirebirdDatabaseService.svc.cs at the Solution Explorer and start debugging.
     public class FirebirdDatabaseService : IFirebirdDatabaseService
     {
-        public string GetData(int value)
+        public string GetDownloadKeyId(int value)
         {
-            return string.Format("You entered: {0}", value);
+            return (value > 0) ? "0.0" : "11111.11111";
         }
 
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
+        public bool InsertDmdata(string dataJson)
         {
-            if (composite == null)
-            {
-                throw new ArgumentNullException("composite");
-            }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
-            }
-            return composite;
+            return dataJson.Equals("yes");
+        }
+
+        public bool InsertInsuletPumpSettings(string dataJson)
+        {
+            return dataJson.Equals("yes");
+        }
+
+        public bool InsertMeterReadingHeader(string dataJson)
+        {
+            return dataJson.Equals("yes");
+        }
+
+        public bool InsertMeterReadings(string dataJson)
+        {
+            return dataJson.Equals("yes");
         }
     }
 }
