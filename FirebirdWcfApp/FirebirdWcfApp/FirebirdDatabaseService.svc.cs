@@ -25,6 +25,11 @@ namespace FirebirdWcfApp
             mq = new MeterQueries(siteId);
         }
 
+        private FirebirdDatabaseService()
+        {
+
+        }
+
         public string GetDownloadKeyId(int value)
         {
             return (value > 0) ? "0.0" : "11111.11111";
