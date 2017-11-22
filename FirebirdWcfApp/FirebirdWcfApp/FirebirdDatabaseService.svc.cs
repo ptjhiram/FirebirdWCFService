@@ -1,4 +1,8 @@
-﻿using System;
+﻿using NET.FirebirdDatabase.EF.AspnetDatabase;
+using NET.FirebirdDatabase.Models.FirebirdTableEntities.Generated;
+using NET.FirebirdDatabase.QueryManager;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -13,10 +17,12 @@ namespace FirebirdWcfApp
     public class FirebirdDatabaseService : IFirebirdDatabaseService
     {
         readonly int SiteId;
+        MeterQueries mq;
 
         public FirebirdDatabaseService(int siteId)
         {
             SiteId = siteId;
+            mq = new MeterQueries(siteId);
         }
 
         public string GetDownloadKeyId(int value)
@@ -26,7 +32,24 @@ namespace FirebirdWcfApp
 
         public bool UpdateDmdata(string dataJson)
         {
-            return dataJson.Equals("yes");
+            try
+            {
+                DMDATAEntity dData = JsonConvert.DeserializeObject<DMDATAEntity>(dataJson);
+
+                if (dData == null)
+                {
+                    return false;
+                }
+
+                //mq.UpdateDmDataValues(dData);
+
+                return dataJson.Equals("yes");
+            }
+            catch (Exception ex)
+            {
+                //log...
+                return false;
+            }
         }
 
         public bool UpdateInsuletPumpSettings(string dataJson)
