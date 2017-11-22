@@ -12,6 +12,13 @@ namespace FirebirdWcfApp
     // NOTE: In order to launch WCF Test Client for testing this service, please select FirebirdDatabaseService.svc or FirebirdDatabaseService.svc.cs at the Solution Explorer and start debugging.
     public class FirebirdDatabaseService : IFirebirdDatabaseService
     {
+        readonly int SiteId;
+
+        public FirebirdDatabaseService(int siteId)
+        {
+            SiteId = siteId;
+        }
+
         public string GetDownloadKeyId(int value)
         {
             return (value > 0) ? "0.0" : "11111.11111";
