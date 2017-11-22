@@ -17,12 +17,12 @@ namespace FirebirdWcfApp
             return (value > 0) ? "0.0" : "11111.11111";
         }
 
-        public bool InsertDmdata(string dataJson)
+        public bool UpdateDmdata(string dataJson)
         {
             return dataJson.Equals("yes");
         }
 
-        public bool InsertInsuletPumpSettings(string dataJson)
+        public bool UpdateInsuletPumpSettings(string dataJson)
         {
             return dataJson.Equals("yes");
         }
@@ -33,6 +33,16 @@ namespace FirebirdWcfApp
         }
 
         public bool InsertMeterReadings(string dataJson)
+        {
+            return dataJson.Equals("yes");
+        }
+
+        public bool InsertPumpTimeSlots(string dataJson)
+        {
+            return dataJson.Equals("yes");
+        }
+
+        public bool InsertPatientPumpProgram(string dataJson)
         {
             return dataJson.Equals("yes");
         }

@@ -21,9 +21,15 @@ namespace FirebirdWcfApp
         bool InsertMeterReadings(string dataJson);
 
         [OperationContract]
-        bool InsertDmdata(string dataJson);
+        bool UpdateDmdata(string dataJson);
 
         [OperationContract]
-        bool InsertInsuletPumpSettings(string dataJson);
+        bool UpdateInsuletPumpSettings(string dataJson);
+
+        [OperationContract]
+        bool InsertPumpTimeSlots(string dataJson);
+
+        [OperationContract]
+        bool InsertPatientPumpProgram(string dataJson);
     }
 }
