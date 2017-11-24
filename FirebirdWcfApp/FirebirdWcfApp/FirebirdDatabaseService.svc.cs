@@ -1,4 +1,5 @@
-﻿using NET.FirebirdDatabase.EF.AspnetDatabase;
+﻿using NET.FirebirdDatabase.DatabaseConnections;
+using NET.FirebirdDatabase.EF.AspnetDatabase;
 using NET.FirebirdDatabase.Models.FirebirdTableEntities.Generated;
 using NET.FirebirdDatabase.QueryManager;
 using Newtonsoft.Json;
@@ -30,25 +31,35 @@ namespace FirebirdWcfApp
 
         }
 
-        public string GetDownloadKeyId(int value)
+        public string GetDownloadKeyId()
         {
-            return (value > 0) ? "0.0" : "11111.11111";
+            try
+            {
+                var fbConn = new FirebirdDbConnection(SiteId);
+
+                return fbConn.GetNextDownloadKeyId();
+            }
+            catch (Exception)
+            {
+                //log....
+                return String.Empty;
+            }
         }
 
         public bool UpdateDmdata(string dataJson)
         {
             try
             {
-                DMDATAEntity dData = JsonConvert.DeserializeObject<DMDATAEntity>(dataJson);
+                DMDATAEntity data = JsonConvert.DeserializeObject<DMDATAEntity>(dataJson);
 
-                if (dData == null)
+                if (data == null)
                 {
                     return false;
                 }
 
-                //mq.UpdateDmDataValues(dData);
+                mq.UpdateDmDataValues(data.PATIENTID, data.LOWBGLEVEL, data.HIGHBGLEVEL, data.LASTMODIFIEDDATE);
 
-                return dataJson.Equals("yes");
+                return true;
             }
             catch (Exception ex)
             {
@@ -59,27 +70,112 @@ namespace FirebirdWcfApp
 
         public bool UpdateInsuletPumpSettings(string dataJson)
         {
-            return dataJson.Equals("yes");
+            try
+            {
+                INSULETPUMPSETTINGSEntity data = JsonConvert.DeserializeObject<INSULETPUMPSETTINGSEntity>(dataJson);
+
+                if (data == null)
+                {
+                    return false;
+                }
+
+                mq.UpdateInsuletPumpSettings(data.PATIENTID, data);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                //log...
+                return false;
+            }
         }
 
         public bool InsertMeterReadingHeader(string dataJson)
         {
-            return dataJson.Equals("yes");
+            try
+            {
+                METERREADINGHEADEREntity data = JsonConvert.DeserializeObject<METERREADINGHEADEREntity>(dataJson);
+
+                if (data == null)
+                {
+                    return false;
+                }
+
+                mq.AddMeterReadingHeader(data);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                //log...
+                return false;
+            }
         }
 
         public bool InsertMeterReadings(string dataJson)
         {
-            return dataJson.Equals("yes");
+            try
+            {
+                List<METERREADINGEntity> data = JsonConvert.DeserializeObject<List<METERREADINGEntity>>(dataJson);
+
+                if (data == null)
+                {
+                    return false;
+                }
+
+                mq.BulkInsertMeterReading(data);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                //log...
+                return false;
+            }
         }
 
         public bool InsertPumpTimeSlots(string dataJson)
         {
-            return dataJson.Equals("yes");
+            try
+            {
+                PUMPTIMESLOTSEntity data = JsonConvert.DeserializeObject<PUMPTIMESLOTSEntity>(dataJson);
+
+                if (data == null)
+                {
+                    return false;
+                }
+
+                mq.AddPumpTimeSlot(data.PATIENTID, data);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                //log...
+                return false;
+            }
         }
 
         public bool InsertPatientPumpProgram(string dataJson)
         {
-            return dataJson.Equals("yes");
+            try
+            {
+                PATIENTPUMPPROGRAMEntity data = JsonConvert.DeserializeObject<PATIENTPUMPPROGRAMEntity>(dataJson);
+
+                if (data == null)
+                {
+                    return false;
+                }
+
+                mq.AddPatientPumpProgram(data);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                //log...
+                return false;
+            }
         }
     }
 }

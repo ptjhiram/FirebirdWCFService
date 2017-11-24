@@ -12,7 +12,7 @@ namespace FirebirdWcfApp
     public interface IFirebirdDatabaseService
     {
         [OperationContract]
-        string GetDownloadKeyId(int value);
+        string GetDownloadKeyId();
 
         [OperationContract]
         bool InsertMeterReadingHeader(string dataJson);
