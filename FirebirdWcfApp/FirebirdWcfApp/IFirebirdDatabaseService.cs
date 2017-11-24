@@ -12,24 +12,24 @@ namespace FirebirdWcfApp
     public interface IFirebirdDatabaseService
     {
         [OperationContract]
-        string GetDownloadKeyId();
+        string GetDownloadKeyId(int siteId);
 
         [OperationContract]
-        bool InsertMeterReadingHeader(string dataJson);
+        bool InsertMeterReadingHeader(int siteId, string dataJson);
 
         [OperationContract]
-        bool InsertMeterReadings(string dataJson);
+        bool InsertMeterReadings(int siteId, string dataJson);
 
         [OperationContract]
-        bool UpdateDmdata(string dataJson);
+        bool UpdateDmdata(int siteId, string dataJson);
 
         [OperationContract]
-        bool UpdateInsuletPumpSettings(string dataJson);
+        bool UpdateInsuletPumpSettings(int siteId, string dataJson);
 
         [OperationContract]
-        bool InsertPumpTimeSlots(string dataJson);
+        bool InsertPumpTimeSlots(int siteId, string dataJson);
 
         [OperationContract]
-        bool InsertPatientPumpProgram(string dataJson);
+        bool InsertPatientPumpProgram(int siteId, string dataJson);
     }
 }

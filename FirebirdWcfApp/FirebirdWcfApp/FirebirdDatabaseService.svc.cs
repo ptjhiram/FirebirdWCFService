@@ -13,30 +13,19 @@ using System.Text;
 
 namespace FirebirdWcfApp
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "FirebirdDatabaseService" in code, svc and config file together.
-    // NOTE: In order to launch WCF Test Client for testing this service, please select FirebirdDatabaseService.svc or FirebirdDatabaseService.svc.cs at the Solution Explorer and start debugging.
     public class FirebirdDatabaseService : IFirebirdDatabaseService
     {
-        readonly int SiteId;
+        int SiteId;
         MeterQueries mq;
 
-        public FirebirdDatabaseService(int siteId)
-        {
-            SiteId = siteId;
-            mq = new MeterQueries(siteId);
-        }
-
-        private FirebirdDatabaseService()
-        {
-
-        }
-
-        public string GetDownloadKeyId()
+        public string GetDownloadKeyId(int siteId)
         {
             try
             {
-                var fbConn = new FirebirdDbConnection(SiteId);
+                SiteId = siteId;
+                mq = new MeterQueries(siteId);
 
+                var fbConn = new FirebirdDbConnection(SiteId);
                 return fbConn.GetNextDownloadKeyId();
             }
             catch (Exception)
@@ -46,12 +35,14 @@ namespace FirebirdWcfApp
             }
         }
 
-        public bool UpdateDmdata(string dataJson)
+        public bool UpdateDmdata(int siteId, string dataJson)
         {
             try
             {
-                DMDATAEntity data = JsonConvert.DeserializeObject<DMDATAEntity>(dataJson);
+                SiteId = siteId;
+                mq = new MeterQueries(siteId);
 
+                DMDATAEntity data = JsonConvert.DeserializeObject<DMDATAEntity>(dataJson);
                 if (data == null)
                 {
                     return false;
@@ -68,10 +59,13 @@ namespace FirebirdWcfApp
             }
         }
 
-        public bool UpdateInsuletPumpSettings(string dataJson)
+        public bool UpdateInsuletPumpSettings(int siteId, string dataJson)
         {
             try
             {
+                SiteId = siteId;
+                mq = new MeterQueries(siteId);
+
                 INSULETPUMPSETTINGSEntity data = JsonConvert.DeserializeObject<INSULETPUMPSETTINGSEntity>(dataJson);
 
                 if (data == null)
@@ -90,10 +84,13 @@ namespace FirebirdWcfApp
             }
         }
 
-        public bool InsertMeterReadingHeader(string dataJson)
+        public bool InsertMeterReadingHeader(int siteId, string dataJson)
         {
             try
             {
+                SiteId = siteId;
+                mq = new MeterQueries(siteId);
+
                 METERREADINGHEADEREntity data = JsonConvert.DeserializeObject<METERREADINGHEADEREntity>(dataJson);
 
                 if (data == null)
@@ -112,10 +109,13 @@ namespace FirebirdWcfApp
             }
         }
 
-        public bool InsertMeterReadings(string dataJson)
+        public bool InsertMeterReadings(int siteId, string dataJson)
         {
             try
             {
+                SiteId = siteId;
+                mq = new MeterQueries(siteId);
+
                 List<METERREADINGEntity> data = JsonConvert.DeserializeObject<List<METERREADINGEntity>>(dataJson);
 
                 if (data == null)
@@ -134,10 +134,13 @@ namespace FirebirdWcfApp
             }
         }
 
-        public bool InsertPumpTimeSlots(string dataJson)
+        public bool InsertPumpTimeSlots(int siteId, string dataJson)
         {
             try
             {
+                SiteId = siteId;
+                mq = new MeterQueries(siteId);
+
                 PUMPTIMESLOTSEntity data = JsonConvert.DeserializeObject<PUMPTIMESLOTSEntity>(dataJson);
 
                 if (data == null)
@@ -156,10 +159,13 @@ namespace FirebirdWcfApp
             }
         }
 
-        public bool InsertPatientPumpProgram(string dataJson)
+        public bool InsertPatientPumpProgram(int siteId, string dataJson)
         {
             try
             {
+                SiteId = siteId;
+                mq = new MeterQueries(siteId);
+
                 PATIENTPUMPPROGRAMEntity data = JsonConvert.DeserializeObject<PATIENTPUMPPROGRAMEntity>(dataJson);
 
                 if (data == null)
