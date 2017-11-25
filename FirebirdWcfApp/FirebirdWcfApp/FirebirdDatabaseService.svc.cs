@@ -23,12 +23,12 @@ namespace FirebirdWcfApp
             try
             {
                 SiteId = siteId;
-                mq = new MeterQueries(siteId);
+                //mq = new MeterQueries(siteId);
 
                 var fbConn = new FirebirdDbConnection(SiteId);
                 return fbConn.GetNextDownloadKeyId();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 //log....
                 return String.Empty;
