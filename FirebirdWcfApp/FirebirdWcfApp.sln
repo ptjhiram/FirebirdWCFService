@@ -7,10 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirebirdWcfApp", "FirebirdW
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Crib|Any CPU = Crib|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CFE6672F-4114-436A-949B-B6F3A7075713}.Crib|Any CPU.ActiveCfg = Crib|Any CPU
+		{CFE6672F-4114-436A-949B-B6F3A7075713}.Crib|Any CPU.Build.0 = Crib|Any CPU
 		{CFE6672F-4114-436A-949B-B6F3A7075713}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CFE6672F-4114-436A-949B-B6F3A7075713}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFE6672F-4114-436A-949B-B6F3A7075713}.Release|Any CPU.ActiveCfg = Release|Any CPU
