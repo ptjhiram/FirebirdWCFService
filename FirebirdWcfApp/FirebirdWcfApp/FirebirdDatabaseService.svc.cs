@@ -27,7 +27,6 @@ namespace FirebirdWcfApp
 
         private FirebirdDatabaseService()
         {
-
         }
 
         public string GetDownloadKeyId(int value)
