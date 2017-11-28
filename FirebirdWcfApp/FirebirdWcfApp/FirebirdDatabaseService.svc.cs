@@ -141,14 +141,17 @@ namespace FirebirdWcfApp
                 SiteId = siteId;
                 mq = new MeterQueries(siteId);
 
-                PUMPTIMESLOTSEntity data = JsonConvert.DeserializeObject<PUMPTIMESLOTSEntity>(dataJson);
+                List<PUMPTIMESLOTSEntity> data = JsonConvert.DeserializeObject<List<PUMPTIMESLOTSEntity>>(dataJson);
 
                 if (data == null)
                 {
                     return false;
                 }
 
-                mq.AddPumpTimeSlot(data.PATIENTID, data);
+                foreach (var slot in data)
+                {
+                    mq.AddPumpTimeSlot(slot.PATIENTID, slot);
+                }
 
                 return true;
             }
