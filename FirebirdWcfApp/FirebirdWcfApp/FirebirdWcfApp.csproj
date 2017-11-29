@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\StageServer.pubxml" />
     <None Include="Web.Crib.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
