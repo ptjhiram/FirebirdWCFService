@@ -1,4 +1,5 @@
-﻿using NET.FirebirdDatabase.DatabaseConnections;
+﻿using FirebirdWcfApp.ServiceLogging;
+using NET.FirebirdDatabase.DatabaseConnections;
 using NET.FirebirdDatabase.EF.AspnetDatabase;
 using NET.FirebirdDatabase.Models.FirebirdTableEntities.Generated;
 using NET.FirebirdDatabase.QueryManager;
@@ -10,6 +11,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using TraceLogger;
 
 namespace FirebirdWcfApp
 {
@@ -20,23 +22,28 @@ namespace FirebirdWcfApp
 
         public string GetDownloadKeyId(int siteId)
         {
+            ServiceLog sl = new ServiceLog();
             try
             {
                 SiteId = siteId;
-                //mq = new MeterQueries(siteId);
 
-                var fbConn = new FirebirdDbConnection(SiteId);
-                return fbConn.GetNextDownloadKeyId();
+                //var fbConn = new FirebirdDbConnection(SiteId);
+                //return fbConn.GetNextDownloadKeyId();
+
+                throw new Exception("Testing");
             }
             catch (Exception ex)
             {
                 //log....
+                sl.Log(Guid.Empty, "GetDownloadKeyId", "FirebirdDatabaseService", ex.StackTrace, $"SiteId: {SiteId} - Exception: {ex.Message}", String.Empty, ServiceLog.TraceEventType.Error);
+
                 return String.Empty;
             }
         }
 
         public bool UpdateDmdata(int siteId, string dataJson)
         {
+            ServiceLog sl = new ServiceLog();
             try
             {
                 SiteId = siteId;
@@ -55,12 +62,15 @@ namespace FirebirdWcfApp
             catch (Exception ex)
             {
                 //log...
+                sl.Log(Guid.Empty, "UpdateDmdata", "FirebirdDatabaseService", ex.StackTrace, $"SiteId: {SiteId} - Exception: {ex.Message}", dataJson, ServiceLog.TraceEventType.Error);
+
                 return false;
             }
         }
 
         public bool UpdateInsuletPumpSettings(int siteId, string dataJson)
         {
+            ServiceLog sl = new ServiceLog();
             try
             {
                 SiteId = siteId;
@@ -80,12 +90,15 @@ namespace FirebirdWcfApp
             catch (Exception ex)
             {
                 //log...
+                sl.Log(Guid.Empty, "UpdateInsuletPumpSettings", "FirebirdDatabaseService", ex.StackTrace, $"SiteId: {SiteId} - Exception: {ex.Message}", dataJson, ServiceLog.TraceEventType.Error);
+
                 return false;
             }
         }
 
         public bool InsertMeterReadingHeader(int siteId, string dataJson)
         {
+            ServiceLog sl = new ServiceLog();
             try
             {
                 SiteId = siteId;
@@ -105,12 +118,15 @@ namespace FirebirdWcfApp
             catch (Exception ex)
             {
                 //log...
+                sl.Log(Guid.Empty, "InsertMeterReadingHeader", "FirebirdDatabaseService", ex.StackTrace, $"SiteId: {SiteId} - Exception: {ex.Message}", dataJson, ServiceLog.TraceEventType.Error);
+
                 return false;
             }
         }
 
         public bool InsertMeterReadings(int siteId, string dataJson)
         {
+            ServiceLog sl = new ServiceLog();
             try
             {
                 SiteId = siteId;
@@ -130,12 +146,15 @@ namespace FirebirdWcfApp
             catch (Exception ex)
             {
                 //log...
+                sl.Log(Guid.Empty, "InsertMeterReadings", "FirebirdDatabaseService", ex.StackTrace, $"SiteId: {SiteId} - Exception: {ex.Message}", dataJson, ServiceLog.TraceEventType.Error);
+
                 return false;
             }
         }
 
         public bool InsertPumpTimeSlots(int siteId, string dataJson)
         {
+            ServiceLog sl = new ServiceLog();
             try
             {
                 SiteId = siteId;
@@ -158,12 +177,15 @@ namespace FirebirdWcfApp
             catch (Exception ex)
             {
                 //log...
+                sl.Log(Guid.Empty, "InsertPumpTimeSlots", "FirebirdDatabaseService", ex.StackTrace, $"SiteId: {SiteId} - Exception: {ex.Message}", dataJson, ServiceLog.TraceEventType.Error);
+
                 return false;
             }
         }
 
         public bool InsertPatientPumpProgram(int siteId, string dataJson)
         {
+            ServiceLog sl = new ServiceLog();
             try
             {
                 SiteId = siteId;
@@ -183,6 +205,8 @@ namespace FirebirdWcfApp
             catch (Exception ex)
             {
                 //log...
+                sl.Log(Guid.Empty, "InsertPatientPumpProgram", "FirebirdDatabaseService", ex.StackTrace, $"SiteId: {SiteId} - Exception: {ex.Message}", dataJson, ServiceLog.TraceEventType.Error);
+
                 return false;
             }
         }

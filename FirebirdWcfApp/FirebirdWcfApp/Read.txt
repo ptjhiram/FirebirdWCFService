@@ -1,0 +1,18 @@
+﻿**********INTERNAL LOG****************
+
+The internal log class 'InternalLog.cs' is an in-memory 48 hour log that can be queried
+either behind the scenes or in UI (must be created by developer), copied into two text files (one for each 24 hour period)
+or queried through a service call.
+
+**********web.config******************
+
+The following neeeds to go into the <configuration> section (top level node) of the web.config file.
+
+<system.diagnostics>
+    <trace indentsize="4" autoflush="true">
+      <listeners>
+        <clear/>
+        <add name="TraceDB" type="<FULLY QUALIFIED TYPE NAME>, <ASSEMBLY NAME>" />
+      </listeners>
+    </trace>
+</system.diagnostics>
